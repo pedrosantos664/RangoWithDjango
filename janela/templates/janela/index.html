@@ -1,0 +1,317 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rango</title>
+    <link rel="icon" type="image/png" href="{% static 'imagens/favicon.png' %}">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Tenor Sans;
+        }
+
+        .content {
+            height: 520px;
+            width: 935px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
+            z-index: 2;
+        }
+
+        .slides {
+            display: flex;
+            width: 500%;
+            height: 100%;
+            transition: 0.6s ease;
+        }
+
+        .slide {
+            width: 20%;
+            flex-shrink: 0;
+        }
+
+        .slide img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .navigation {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        input {
+            display: none;
+        }
+
+        .bar {
+            width: 15px;
+            height: 15px;
+            border: 2px solid rgb(255, 255, 255);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.3s ease;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .bar:hover {
+            background-color: white;
+            transform: scale(1.2);
+        }
+
+
+        #slide1:checked~.content .slides {
+            margin-left: 0;
+        }
+
+        #slide2:checked~.content .slides {
+            margin-left: -100%;
+        }
+
+        #slide3:checked~.content .slides {
+            margin-left: -200%;
+        }
+
+        #slide4:checked~.content .slides {
+            margin-left: -300%;
+        }
+
+        #slide5:checked~.content .slides {
+            margin-left: -400%;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 18px;
+            color: #000;
+        }
+
+
+        body {
+            color: #333;
+            padding-top: 70px;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+            background: #012B28 100%;
+
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            border-bottom: 1px solid #eee;
+            background-color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-left,
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: #666;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .auth-buttons a {
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 4px;
+        }
+
+        .auth-buttons a:first-child {
+            color: #333;
+        }
+
+        .auth-buttons a:last-child {
+            background-color: #000;
+            color: white;
+        }
+
+
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 8s infinite ease-in-out;
+            z-index: -1;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0);
+            }
+
+            25% {
+                transform: translateY(-20px) translateX(10px);
+            }
+
+            50% {
+                transform: translateY(-40px) translateX(-10px);
+            }
+
+            75% {
+                transform: translateY(-20px) translateX(-15px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-left">
+            <a href="{% url 'index' %}" class="logo">Rango</a>
+            <div class="nav-links">
+                <a href="{% url 'products' %}">Products</a>
+                <a href="{% url 'http://127.0.0.1:8000/janela/contact' %}">Contact</a>
+            </div>
+        </div>
+
+        <div class="nav-right">
+            {% if user.is_authenticated %}
+            <div class="user-buttons">
+                <span class="welcome-text">Olá, {{ user.first_name }}!</span>
+
+                <a href="{% url 'logout' %}">Sair</a>
+            </div>
+            {% else %}
+            <div class="auth-buttons">
+                <a href="{% url 'login' %}">Sign in</a>
+                <a href="{% url 'registro' %}">Register</a>
+            </div>
+            {% endif %}
+        </div>
+    </nav>
+
+
+    <input type="radio" name="slide" id="slide1" checked>
+    <input type="radio" name="slide" id="slide2">
+    <input type="radio" name="slide" id="slide3">
+    <input type="radio" name="slide" id="slide4">
+    <input type="radio" name="slide" id="slide5">
+
+    <div class="content">
+        <div class="slides">
+            <div class="slide">
+                <img src="{% static 'imagens/65644Medsker_SundayInBrooklyn_February_067.jpg' %}" alt="Slide 1">
+            </div>
+            <div class="slide">
+                <img src="{% static 'imagens/Qd5cbsfbQEifhoBtuXq7_zKMQYlWoQQanZ2m61Fgm_Copy of 180718_SundayInBrooklyn_0328.jpg' %}"
+                    alt="Slide 2">
+            </div>
+            <div class="slide">
+                <img src="{% static 'imagens/94637Medsker_SundayInBrooklyn_February_231.jpg' %}" alt="Slide 3">
+            </div>
+            <div class="slide">
+                <img src="{% static 'imagens/14385Medsker_SundayInBrooklyn_Fall_007.jpg' %}" alt="Slide 4">
+            </div>
+            <div class="slide">
+                <img src="{% static 'imagens/17338Medsker_SundayInBrooklyn_August2019_105.jpg' %}" alt="Slide 5">
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <label class="bar" for="slide1"></label>
+        <label class="bar" for="slide2"></label>
+        <label class="bar" for="slide3"></label>
+        <label class="bar" for="slide4"></label>
+        <label class="bar" for="slide5"></label>
+    </div>
+
+    <script>
+        let contador = 1;
+
+        setInterval(function () {
+            document.getElementById('slide' + contador).checked = true;
+            contador++;
+
+            if (contador > 5) {
+                contador = 1;
+            }
+        }, 3000);
+
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const body = document.querySelector('body');
+            for (let i = 0; i < 15; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+
+                // Tamanho aleatório
+                const size = Math.random() * 100 + 20;
+
+                // Posição aleatória
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+
+                // Atraso aleatório para animação
+                const delay = Math.random() * 5;
+
+                // Opacidade aleatória
+                const opacity = Math.random() * 0.3 + 0.1;
+
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                bubble.style.left = `${posX}%`;
+                bubble.style.top = `${posY}%`;
+                bubble.style.animationDelay = `${delay}s`;
+                bubble.style.opacity = opacity;
+
+                body.appendChild(bubble);
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>

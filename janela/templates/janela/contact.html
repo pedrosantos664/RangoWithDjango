@@ -1,0 +1,297 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rango</title>
+    <link rel="icon" type="image/png" href="{% static 'imagens/favicon.png' %}">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Tenor Sans;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmVzdGF1cmFudCUyMGludGVyaW9yfGVufDB8fDB8fHww&w=1000&q=80') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            border-bottom: 1px solid #eee;
+            background-color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-left,
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: #666;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .auth-buttons a {
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 4px;
+        }
+
+        .auth-buttons a:first-child {
+            color: #333;
+        }
+
+        .auth-buttons a:last-child {
+            background-color: #000;
+            color: white;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 18px;
+            color: #000;
+        }
+
+
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.15);
+            /* Transparência apenas no fundo */
+            backdrop-filter: blur(10px);
+            /* Efeito de vidro fosco */
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .form-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 16px;
+            color: white;
+            margin-bottom: 10px;
+            font-weight: 500;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            font-size: 16px;
+            transition: all 0.3s;
+            color: white;
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .form-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .form-textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background-color: rgba(0, 0, 0, 0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 576px) {
+            .form-container {
+                padding: 25px;
+            }
+
+            .form-title {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-left">
+            <a href="{% url 'index' %}" class="logo">Rango</a>
+            <div class="nav-links">
+                <a href="{% url 'products' %}">Products</a>
+                <a href="{% url 'contact' %}">Contact</a>
+            </div>
+        </div>
+
+        <div class="nav-right">
+            {% if user.is_authenticated %}
+            <div class="user-buttons">
+                <span class="welcome-text">Olá, {{ user.first_name }}!</span>
+
+                <a href="{% url 'logout' %}">Sair</a>
+            </div>
+            {% else %}
+            <div class="auth-buttons">
+                <a href="{% url 'login' %}">Sign in</a>
+                <a href="{% url 'registro' %}">Register</a>
+            </div>
+            {% endif %}
+        </div>
+    </nav>
+
+
+    <div class="form-container">
+        <h2 class="form-title">Contact Us</h2>
+
+        <!-- Mensagens de status -->
+        <div id="successMessage" class="success-message">
+            Obrigado pela sua mensagem! Responderemos em breve.
+        </div>
+
+        <div id="errorMessage" class="error-message">
+            Ocorreu um erro. Por favor, tente novamente mais tarde.
+        </div>
+
+        <!-- Formulário usando EmailJS -->
+        <form id="contactForm">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" id="name" name="from_name" class="form-input" placeholder="Your name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="surname" class="form-label">Surname</label>
+                <input type="text" id="surname" name="from_surname" class="form-input" placeholder="Your surname"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" name="from_email" class="form-input" placeholder="Your email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="message" class="form-label">Message</label>
+                <textarea id="message" name="message" class="form-input form-textarea" placeholder="Your message"
+                    required></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+
+
+    </div>
+
+    <!-- Adicione o SDK do EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
+    <script>
+        // Inicialize o EmailJS com seu User ID do Outlook
+        // OBTER EM: https://www.emailjs.com/ após configurar o serviço Outlook
+        emailjs.init("X5ZieltQKUiMfRhju");
+
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const submitBtn = this.querySelector('.submit-btn');
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+
+            // Envie o email usando EmailJS com o serviço Outlook
+            emailjs.sendForm('service_lgud2en', 'template_ofjb6gq', this)
+                .then(function () {
+                    document.getElementById('successMessage').style.display = 'block';
+                    document.getElementById('errorMessage').style.display = 'none';
+                    document.getElementById('contactForm').reset();
+                    submitBtn.textContent = 'Send Message';
+                    submitBtn.disabled = false;
+                }, function (error) {
+                    document.getElementById('errorMessage').style.display = 'block';
+                    document.getElementById('successMessage').style.display = 'none';
+                    submitBtn.textContent = 'Send Message';
+                    submitBtn.disabled = false;
+                    console.error('Erro ao enviar:', error);
+                });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,317 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rango</title>
+    <link rel="icon" type="image/png" href="{% static 'imagens/favicon.png' %}">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Tenor Sans;
+        }
+
+        body {
+            background: #012B28 100%;
+            color: #333;
+            padding: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            border-bottom: 1px solid #eee;
+            background-color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-left,
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: #666;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .auth-buttons a {
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 4px;
+        }
+
+        .auth-buttons a:first-child {
+            color: #333;
+        }
+
+        .auth-buttons a:last-child {
+            background-color: #000;
+            color: white;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 18px;
+            color: #000;
+        }
+
+
+        .products-container {
+            margin-top: 120px;
+
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .product-name {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .product-price {
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 8s infinite ease-in-out;
+            z-index: -1;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0);
+            }
+
+            25% {
+                transform: translateY(-20px) translateX(10px);
+            }
+
+            50% {
+                transform: translateY(-40px) translateX(-10px);
+            }
+
+            75% {
+                transform: translateY(-20px) translateX(-15px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-left">
+            <a href="{% url 'index' %}" class="logo">Rango</a>
+            <div class="nav-links">
+                <a href="{% url 'products' %}">Products</a>
+                <a href="{% url 'contact' %}">Contact</a>
+            </div>
+        </div>
+        <div class="nav-right">
+            {% if user.is_authenticated %}
+            <div class="user-buttons">
+                <span class="welcome-text">Olá, {{ user.first_name }}!</span>
+
+                <a href="{% url 'logout' %}">Sair</a>
+            </div>
+            {% else %}
+            <div class="auth-buttons">
+                <a href="{% url 'login' %}">Sign in</a>
+                <a href="{% url 'registro' %}">Register</a>
+            </div>
+            {% endif %}
+        </div>
+        </div>
+    </nav>
+
+
+    <div class="products-container">
+        <div class="product-card">
+            <img src="{% static 'imagens/31078Medsker_SundayInBrooklyn_February_239.jpg' %}" alt="Produto 1">
+            <div class="product-name">Produto 1</div>
+            <div class="product-price">R$ 19,90</div>
+        </div>
+
+        <div class="product-card">
+            <img src="{% static 'imagens/38407Medsker_SundayInBrooklyn_Fall_014.jpg' %}" alt="Produto 2">
+            <div class="product-name">Produto 2</div>
+            <div class="product-price">R$ 25,00</div>
+        </div>
+
+        <div class="product-card">
+            <img src="{% static 'imagens/40883Medsker_SundayInBrooklyn_August2019_126.jpg' %}" alt="Produto 3">
+            <div class="product-name">Produto 3</div>
+            <div class="product-price">R$ 12,50</div>
+        </div>
+
+        <div class="product-card">
+            <img src="{% static 'imagens/49253Medsker_SundayInBrooklyn_February_203.jpg' %}" alt="Produto 4">
+            <div class="product-name">Produto 4</div>
+            <div class="product-price">R$ 30,00</div>
+        </div>
+
+        <div class="product-card">
+            <img src="{% static 'imagens/63476Medsker_SundayInBrooklyn_Fall_015.jpg' %}" alt="Produto 5">
+            <div class="product-name">Produto 5</div>
+            <div class="product-price">R$ 22,00</div>
+        </div>
+
+        <div class="product-card">
+            <img src="{% static 'imagens/64836Medsker_SundayInBrooklyn_August2019_136.jpg' %}" alt="Produto 6">
+            <div class="product-name">Produto 6</div>
+            <div class="product-price">R$ 27,90</div>
+        </div>
+
+        <div class="product-card">
+            <img src="{% static 'imagens/65644Medsker_SundayInBrooklyn_February_067.jpg' %}" alt="Produto 7">
+            <div class="product-name">Produto 7</div>
+            <div class="product-price">R$ 15,00</div>
+        </div>
+
+        <div class="product-card">
+            <img src="{% static 'imagens/76024Medsker_SundayInBrooklyn_Fall_017.jpg' %}" alt="Produto 8">
+            <div class="product-name">Produto 8</div>
+            <div class="product-price">R$ 35,00</div>
+        </div>
+
+        <div class="product-card">
+            <img src="{% static 'imagens/76068Medsker_SundayInBrooklyn_Fall_013_2.jpg' %}" alt="Produto 9">
+            <div class="product-name">Produto 9</div>
+            <div class="product-price">R$ 28,50</div>
+        </div>
+
+        <div class="product-card">
+            <img src="{% static 'imagens/88717Medsker_SundayInBrooklyn_Fall_016.jpg' %}" alt="Produto 10">
+            <div class="product-name">Produto 10</div>
+            <div class="product-price">R$ 20,00</div>
+        </div>
+
+        <div class="product-card">
+            <img src="{% static 'imagens/94637Medsker_SundayInBrooklyn_February_231.jpg' %}" alt="Produto 11">
+            <div class="product-name">Produto 11</div>
+            <div class="product-price">R$ 32,00</div>
+        </div>
+
+        <div class="product-card">
+            <img src="{% static 'imagens/95488Medsker_SundayInBrooklyn_Fall_003.jpg' %}" alt="Produto 12">
+            <div class="product-name">Produto 12</div>
+            <div class="product-price">R$ 18,90</div>
+        </div>
+
+        <div class="product-card">
+            <img src="{% static 'imagens/99204Medsker_SundayInBrooklyn_August2019_017.jpg' %}" alt="Produto 13">
+            <div class="product-name">Produto 13</div>
+            <div class="product-price">R$ 24,00</div>
+        </div>
+
+        <div class="product-card">
+            <img src="{% static 'imagens/Qd5cbsfbQEifhoBtuXq7_zKMQYlWoQQanZ2m61Fgm_Copy of 180718_SundayInBrooklyn_0328.jpg' %}"
+                alt="Produto 15">
+            <div class="product-name">Produto 15</div>
+            <div class="product-price">R$ 40,00</div>
+        </div>
+    </div>
+
+
+
+    </div>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const body = document.querySelector('body');
+            for (let i = 0; i < 15; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+
+                // Tamanho aleatório
+                const size = Math.random() * 100 + 20;
+
+                // Posição aleatória
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+
+                // Atraso aleatório para animação
+                const delay = Math.random() * 5;
+
+                // Opacidade aleatória
+                const opacity = Math.random() * 0.3 + 0.1;
+
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                bubble.style.left = `${posX}%`;
+                bubble.style.top = `${posY}%`;
+                bubble.style.animationDelay = `${delay}s`;
+                bubble.style.opacity = opacity;
+
+                body.appendChild(bubble);
+            }
+        });
+
+    </script>
+</body>
+
+</html>
