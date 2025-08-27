@@ -120,7 +120,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'janela/templates/janela'),  # Agora inclui templates
+    os.path.join(BASE_DIR, 'janela/templates/janela'),  
 ]
 
 
