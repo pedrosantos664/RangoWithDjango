@@ -87,14 +87,12 @@ def logout_view(request):
     messages.success(request, 'Você saiu com sucesso!')
     return redirect('index')
 
-# View protegida como exemplo
+
 @login_required
 
 
 def check_auth(request):
-    """
-    Context processor personalizado para verificar autenticação
-    """
+   
     usuario_autenticado = False
     usuario_nome = None
     usuario_id = None
