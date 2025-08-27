@@ -220,7 +220,7 @@
     <div class="form-container">
         <h2 class="form-title">Contact Us</h2>
 
-        <!-- Mensagens de status -->
+        
         <div id="successMessage" class="success-message">
             Obrigado pela sua mensagem! Responderemos em breve.
         </div>
@@ -229,7 +229,7 @@
             Ocorreu um erro. Por favor, tente novamente mais tarde.
         </div>
 
-        <!-- Formulário usando EmailJS -->
+        
         <form id="contactForm">
             {% csrf_token %}
 
@@ -261,11 +261,10 @@
 
     </div>
 
-    <!-- Adicione o SDK do EmailJS -->
+    
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
     <script>
-        // Inicialize o EmailJS com seu User ID do Outlook
-        // OBTER EM: https://www.emailjs.com/ após configurar o serviço Outlook
+    
         emailjs.init("X5ZieltQKUiMfRhju");
 
         document.getElementById('contactForm').addEventListener('submit', function (e) {
@@ -275,7 +274,7 @@
             submitBtn.textContent = 'Sending...';
             submitBtn.disabled = true;
 
-            // Envie o email usando EmailJS com o serviço Outlook
+          
             emailjs.sendForm('service_lgud2en', 'template_ofjb6gq', this)
                 .then(function () {
                     document.getElementById('successMessage').style.display = 'block';
