@@ -114,13 +114,3 @@ Boas práticas de organização de projetos em Python.
 
 Pedro Batista
 
-💼 LinkedIn
-
-📧 pedrosarcozi@gmail.com
-
-
----
-
-👉 Esse README já está no formato ideal para portfólio.  
-Quer que eu também prepare um **.gitignore específico para Django** (para evitar versionar `venv`, `db.sqlite3` e outros arquivos desnecessários)?
-
