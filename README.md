@@ -86,7 +86,7 @@ RangoWithDjango/
 '
 
 ## 📖 Aprendizados com o Projeto
-     ```bash
+     
       Estrutura e funcionamento do framework Django.
        
       Criação de models, views, templates e formulários.
@@ -100,6 +100,7 @@ RangoWithDjango/
 ## ✨ Autor
 
    Pedro Batista
+
 
 
 
