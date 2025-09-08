@@ -52,54 +52,55 @@ RangoWithDjango/
 
 
 2. **Criar e ativar ambiente virtual**
-
-python -m venv venv
-source venv/bin/activate   # Linux/Mac
-venv\Scripts\activate      # Windows
+   ```bash
+   python -m venv venv
+   source venv/bin/activate   # Linux/Mac
+   venv\Scripts\activate      # Windows
 
 
 3. **Instalar dependências**
-
-pip install -r requirements.txt
+   ```bash
+   pip install -r requirements.txt
 
 
 4. **Aplicar migrações**
-
-python manage.py migrate
+   ```bash
+   python manage.py migrate
 
 
 5. **Criar superusuário (para acessar o admin)**
-
-python manage.py createsuperuser
-
-
-Executar o servidor
-
-python manage.py runserver
+   ```bash
+   python manage.py createsuperuser
 
 
-6. **Acessar no navegador**
+6. **Executar o servidor**
+   ```bash
+   python manage.py runserver
 
-Aplicação: 127.0.0.1:8000/janela/
 
-Admin:127.0.0.1:8000/admin
-
+7. **Acessar no navegador**
+   ```bash
+   Aplicação: 127.0.0.1:8000/janela/
+   
+   Admin:127.0.0.1:8000/admin
+'
 
 ## 📖 Aprendizados com o Projeto
-
-Estrutura e funcionamento do framework Django.
-
-Criação de models, views, templates e formulários.
-
-Autenticação e autorização de usuários.
-
-Integração de templates com Bootstrap.
-
-Boas práticas de organização de projetos em Python.
+     ```bash
+      Estrutura e funcionamento do framework Django.
+       
+      Criação de models, views, templates e formulários.
+      
+      Autenticação e autorização de usuários.
+      
+      Integração de templates com Bootstrap.
+      
+      Boas práticas de organização de projetos em Python.
 
 ## ✨ Autor
 
-Pedro Batista
+   Pedro Batista
+
 
 
 
