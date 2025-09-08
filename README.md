@@ -63,12 +63,12 @@ venv\Scripts\activate      # Windows
 pip install -r requirements.txt
 
 
-$. **Aplicar migrações**
+4. **Aplicar migrações**
 
 python manage.py migrate
 
 
-4. **Criar superusuário (para acessar o admin)**
+5. **Criar superusuário (para acessar o admin)**
 
 python manage.py createsuperuser
 
@@ -78,7 +78,7 @@ Executar o servidor
 python manage.py runserver
 
 
-5. **Acessar no navegador**
+6. **Acessar no navegador**
 
 Aplicação: 127.0.0.1:8000/janela/
 
@@ -100,5 +100,6 @@ Boas práticas de organização de projetos em Python.
 ## ✨ Autor
 
 Pedro Batista
+
 
 
