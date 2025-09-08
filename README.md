@@ -51,24 +51,24 @@ RangoWithDjango/
    cd RangoWithDjango
 
 
-Criar e ativar ambiente virtual
+2. **Criar e ativar ambiente virtual**
 
 python -m venv venv
 source venv/bin/activate   # Linux/Mac
 venv\Scripts\activate      # Windows
 
 
-Instalar dependências
+3. **Instalar dependências**
 
 pip install -r requirements.txt
 
 
-Aplicar migrações
+$. **Aplicar migrações**
 
 python manage.py migrate
 
 
-Criar superusuário (para acessar o admin)
+4. **Criar superusuário (para acessar o admin)**
 
 python manage.py createsuperuser
 
@@ -78,27 +78,14 @@ Executar o servidor
 python manage.py runserver
 
 
-Acessar no navegador
+5. **Acessar no navegador**
 
-Aplicação: http://localhost:8000/
+Aplicação: 127.0.0.1:8000/janela/
 
-Admin: http://localhost:8000/admin/
+Admin:127.0.0.1:8000/admin
 
-📸 Capturas de Tela (opcional)
 
-(Adicione imagens ou GIFs aqui mostrando a interface do sistema — ex: página inicial, cadastro, painel admin, etc.)
-
-🌍 Deploy
-
-Se desejar disponibilizar online, você pode usar:
-
-PythonAnywhere
-
-Heroku
-
-Railway
-
-📖 Aprendizados com o Projeto
+## 📖 Aprendizados com o Projeto
 
 Estrutura e funcionamento do framework Django.
 
@@ -110,7 +97,8 @@ Integração de templates com Bootstrap.
 
 Boas práticas de organização de projetos em Python.
 
-✨ Autor
+## ✨ Autor
 
 Pedro Batista
+
 
